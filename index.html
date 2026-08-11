@@ -1,0 +1,724 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hariom | 3D Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050510;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Background */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-2;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    background:#6c00ff;
+    filter:blur(180px);
+    opacity:.25;
+    top:-150px;
+    left:-150px;
+    z-index:-1;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#00eaff;
+    filter:blur(180px);
+    opacity:.15;
+    right:-150px;
+    bottom:-100px;
+    z-index:-1;
+}
+
+/* Navbar */
+nav{
+    width:100%;
+    padding:20px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:100;
+    backdrop-filter:blur(15px);
+    background:rgba(5,5,16,.55);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    color:#00eaff;
+    text-shadow:0 0 15px #00eaff;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#00eaff;
+}
+
+/* Hero */
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:100px 7%;
+}
+
+.hero-content{
+    width:55%;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 18px;
+    border:1px solid #00eaff;
+    border-radius:30px;
+    color:#00eaff;
+    margin-bottom:20px;
+    box-shadow:0 0 20px rgba(0,234,255,.2);
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,90px);
+    line-height:1;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#00eaff;
+    text-shadow:0 0 25px #00eaff;
+}
+
+.hero p{
+    color:#bbb;
+    font-size:18px;
+    line-height:1.7;
+    max-width:650px;
+}
+
+.buttons{
+    margin-top:30px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:13px 25px;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    border:1px solid #00eaff;
+    transition:.3s;
+}
+
+.btn.primary{
+    background:#00eaff;
+    color:#001015;
+    font-weight:bold;
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px #00eaff;
+}
+
+/* 3D Card */
+.hero-card{
+    width:350px;
+    height:430px;
+    perspective:1000px;
+}
+
+.card{
+    width:100%;
+    height:100%;
+    padding:30px;
+    border:1px solid rgba(0,234,255,.4);
+    border-radius:30px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        rgba(255,255,255,.02)
+    );
+    backdrop-filter:blur(20px);
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.5),
+        inset 0 0 30px rgba(0,234,255,.08);
+    transform-style:preserve-3d;
+    transition:transform .15s ease;
+}
+
+.profile{
+    height:180px;
+    width:180px;
+    margin:20px auto;
+    border-radius:50%;
+    border:3px solid #00eaff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:65px;
+    color:#00eaff;
+    box-shadow:0 0 40px rgba(0,234,255,.5);
+    transform:translateZ(60px);
+}
+
+.card h2{
+    text-align:center;
+    font-size:28px;
+    transform:translateZ(40px);
+}
+
+.card p{
+    text-align:center;
+    color:#aaa;
+    margin-top:10px;
+    transform:translateZ(30px);
+}
+
+/* Sections */
+section{
+    padding:100px 7%;
+}
+
+.title{
+    text-align:center;
+    font-size:45px;
+    margin-bottom:50px;
+}
+
+.title span{
+    color:#00eaff;
+}
+
+/* About */
+.about{
+    display:flex;
+    justify-content:center;
+}
+
+.about-box{
+    max-width:900px;
+    padding:40px;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(15px);
+    line-height:1.8;
+    color:#bbb;
+    text-align:center;
+}
+
+/* Skills */
+.skills{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.skill{
+    width:150px;
+    height:150px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:20px;
+    border:1px solid rgba(0,234,255,.3);
+    background:rgba(255,255,255,.04);
+    font-size:20px;
+    font-weight:bold;
+    transition:.4s;
+    transform-style:preserve-3d;
+}
+
+.skill:hover{
+    transform:rotateY(20deg) rotateX(15deg) translateY(-10px);
+    box-shadow:0 15px 30px rgba(0,234,255,.25);
+    color:#00eaff;
+}
+
+/* Projects */
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.project{
+    min-height:240px;
+    padding:30px;
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(12px);
+    transition:.4s;
+}
+
+.project:hover{
+    transform:translateY(-12px) rotateX(5deg);
+    border-color:#00eaff;
+    box-shadow:0 20px 40px rgba(0,234,255,.15);
+}
+
+.project h3{
+    color:#00eaff;
+    margin-bottom:15px;
+}
+
+.project p{
+    color:#aaa;
+    line-height:1.6;
+}
+
+/* Contact */
+.contact{
+    text-align:center;
+}
+
+.contact p{
+    color:#aaa;
+    margin-bottom:25px;
+}
+
+footer{
+    padding:25px;
+    text-align:center;
+    color:#777;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* Mobile */
+@media(max-width:800px){
+
+    nav ul{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        gap:50px;
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .hero-card{
+        width:300px;
+        height:380px;
+    }
+
+    .profile{
+        width:150px;
+        height:150px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="space"></canvas>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">HARIOM.DEV</div>
+
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🚀 3D Interactive Portfolio
+        </div>
+
+        <h1>
+            Hi, I'm <span>Hariom</span>
+        </h1>
+
+        <p>
+            BCA 2nd Year Student & Web Developer.
+            I create modern, responsive and interactive
+            websites using HTML, CSS and JavaScript.
+        </p>
+
+        <div class="buttons">
+            <a href="#projects" class="btn primary">
+                View Projects
+            </a>
+
+            <a href="#contact" class="btn">
+                Contact Me
+            </a>
+
+            <a href="#" class="btn" onclick="downloadCV()">
+                Download CV
+            </a>
+        </div>
+
+    </div>
+
+    <!-- 3D CARD -->
+    <div class="hero-card">
+
+        <div class="card" id="card">
+
+            <div class="profile">
+                H
+            </div>
+
+            <h2>Hariom</h2>
+
+            <p>
+                BCA 2nd Year<br>
+                Web Developer
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about">
+
+    <h2 class="title">
+        About <span>Me</span>
+    </h2>
+
+    <div class="about">
+
+        <div class="about-box">
+
+            <p>
+                Hello! I'm Hariom, a BCA student and aspiring
+                Web Developer. I enjoy creating beautiful,
+                interactive and user-friendly websites.
+
+                <br><br>
+
+                I am currently improving my skills in
+                JavaScript, frontend development and
+                modern web technologies.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills">
+
+    <h2 class="title">
+        My <span>Skills</span>
+    </h2>
+
+    <div class="skills">
+
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">C</div>
+        <div class="skill">C++</div>
+        <div class="skill">GitHub</div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJECTS -->
+<section id="projects">
+
+    <h2 class="title">
+        My <span>Projects</span>
+    </h2>
+
+    <div class="projects">
+
+        <div class="project">
+            <h3>🤖 JARVIS HUD</h3>
+            <p>
+                Futuristic AI-style HUD interface
+                with interactive animations.
+            </p>
+        </div>
+
+        <div class="project">
+            <h3>🎵 Music Website</h3>
+            <p>
+                A music website where songs can
+                be added and played directly.
+            </p>
+        </div>
+
+        <div class="project">
+            <h3>📓 Online Notebook</h3>
+            <p>
+                Password protected digital notebook
+                with typing and save functionality.
+            </p>
+        </div>
+
+        <div class="project">
+            <h3>🛒 Shopping Website</h3>
+            <p>
+                Modern responsive shopping website
+                created using frontend technologies.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+
+    <h2 class="title">
+        Contact <span>Me</span>
+    </h2>
+
+    <p>
+        Interested in working together? Let's connect.
+    </p>
+
+    <div class="buttons" style="justify-content:center">
+
+        <a href="mailto:yourmail@gmail.com" class="btn primary">
+            📧 Email Me
+        </a>
+
+        <a href="https://github.com/" target="_blank" class="btn">
+            GitHub
+        </a>
+
+    </div>
+
+</section>
+
+
+<footer>
+    © 2026 Hariom | 3D Web Developer Portfolio
+</footer>
+
+
+<script>
+
+/* =========================
+   3D CARD MOUSE EFFECT
+========================= */
+
+const card = document.getElementById("card");
+
+document.addEventListener("mousemove", (e) => {
+
+    const x = (window.innerWidth / 2 - e.clientX) / 25;
+    const y = (window.innerHeight / 2 - e.clientY) / 25;
+
+    card.style.transform =
+        `rotateY(${x}deg) rotateX(${y}deg)`;
+
+});
+
+card.addEventListener("mouseleave", () => {
+
+    card.style.transform =
+        "rotateY(0deg) rotateX(0deg)";
+
+});
+
+
+/* =========================
+   SPACE PARTICLES
+========================= */
+
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resize(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener("resize", resize);
+
+
+for(let i = 0; i < 120; i++){
+
+    particles.push({
+
+        x:Math.random() * canvas.width,
+        y:Math.random() * canvas.height,
+        size:Math.random() * 2 + 0.5,
+        speed:Math.random() * 0.5 + 0.1
+
+    });
+
+}
+
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p => {
+
+        p.y -= p.speed;
+
+        if(p.y < 0){
+            p.y = canvas.height;
+            p.x = Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = "rgba(0,234,255,.7)";
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(animate);
+
+}
+
+animate();
+
+
+/* =========================
+   CV DOWNLOAD
+========================= */
+
+function downloadCV(){
+
+    const cv = `
+HARIOM
+BCA 2nd Year Student | Web Developer
+
+SKILLS
+HTML
+CSS
+JavaScript
+C
+C++
+GitHub
+
+ABOUT
+Aspiring Web Developer interested in creating
+modern and interactive websites.
+
+PROJECTS
+3D Portfolio
+JARVIS HUD
+Music Website
+Online Notebook
+Shopping Website
+`;
+
+    const blob = new Blob([cv], {
+        type:"text/plain"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "Hariom-CV.txt";
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+</script>
+
+</body>
+</html>
+```
