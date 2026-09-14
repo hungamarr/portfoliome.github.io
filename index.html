@@ -1,366 +1,604 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hariom | 3D Portfolio</title>
+<title>Hariom | Frontend Developer</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-html{
     scroll-behavior:smooth;
 }
 
 body{
-    background:#050510;
-    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4edf5;
+    color:#171117;
     overflow-x:hidden;
 }
 
-/* Background */
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-2;
-}
+/* ================= BACKGROUND ================= */
 
 body::before{
     content:"";
     position:fixed;
-    width:500px;
-    height:500px;
-    background:#6c00ff;
-    filter:blur(180px);
-    opacity:.25;
-    top:-150px;
-    left:-150px;
+    inset:-10px;
+    background:
+        url("https://scontent.cdninstagram.com/v/t51.82787-19/799170684_18062683139607713_3507992550684962475_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=101&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JQR6V8q2bDoQ7kNvwGPZuZ-&_nc_oc=AdqBFcuq9sVI7Pt3tqeTJ5AgjU-BuEULpkZ_FFgxDVPJy2aplmHrgpzvFoZzuJVxhgbVixXj8263VPz7WWqtrjn2&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=EGhCQBqzY-tdFyevNTckWw&_nc_ss=7b689&oh=00_AQIGaQF0fnXsG8nRq7J5PvPO78oBEARQjIpefnZb8tFNCg&oe=6AAD7EF0") center/cover no-repeat;
+    filter:blur(1px);
     z-index:-1;
+    transform:scale(1.0);
 }
 
 body::after{
     content:"";
     position:fixed;
-    width:400px;
-    height:400px;
-    background:#00eaff;
-    filter:blur(180px);
-    opacity:.15;
-    right:-150px;
-    bottom:-100px;
+    inset:0;
+    background:rgba(245,237,246,.72);
     z-index:-1;
 }
 
-/* Navbar */
+/* ================= NAVBAR ================= */
+
 nav{
-    width:100%;
-    padding:20px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
     position:fixed;
     top:0;
     left:0;
-    z-index:100;
+    width:100%;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    background:rgba(222,168,220,.75);
     backdrop-filter:blur(15px);
-    background:rgba(5,5,16,.55);
-    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:1000;
+    border-bottom:1px solid rgba(255,255,255,.4);
 }
 
 .logo{
     font-size:25px;
-    font-weight:bold;
-    color:#00eaff;
-    text-shadow:0 0 15px #00eaff;
+    font-weight:800;
+    color:#ac0aa1;
 }
 
-nav ul{
+.nav-links{
     display:flex;
+    gap:38px;
     list-style:none;
-    gap:30px;
 }
 
-nav a{
-    color:white;
+.nav-links a{
     text-decoration:none;
+    color:#191219;
+    font-size:14px;
+    font-weight:600;
     transition:.3s;
 }
 
-nav a:hover{
-    color:#00eaff;
+.nav-links a:hover{
+    color:#a719a0;
 }
 
-/* Hero */
+/* ================= HERO ================= */
+
 .hero{
     min-height:100vh;
+    padding:120px 5% 60px;
     display:flex;
     align-items:center;
-    justify-content:center;
-    padding:100px 7%;
+    position:relative;
+    overflow:hidden;
 }
 
 .hero-content{
-    width:55%;
+    width:65%;
+    position:relative;
+    z-index:2;
 }
 
-.badge{
-    display:inline-block;
-    padding:9px 18px;
-    border:1px solid #00eaff;
-    border-radius:30px;
-    color:#00eaff;
-    margin-bottom:20px;
-    box-shadow:0 0 20px rgba(0,234,255,.2);
+.small-title{
+    color:#a51c9e;
+    font-size:16px;
+    letter-spacing:4px;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
 .hero h1{
-    font-size:clamp(45px,7vw,90px);
-    line-height:1;
-    margin-bottom:20px;
+    font-size:clamp(70px,10vw,155px);
+    line-height:.82;
+    letter-spacing:-8px;
+    color:#a81da1;
+    font-weight:900;
 }
 
 .hero h1 span{
-    color:#00eaff;
-    text-shadow:0 0 25px #00eaff;
+    display:block;
 }
 
-.hero p{
-    color:#bbb;
-    font-size:18px;
+.hero-text{
+    max-width:580px;
+    margin-top:35px;
+    font-size:17px;
     line-height:1.7;
-    max-width:650px;
+    color:#322a32;
 }
 
-.buttons{
-    margin-top:30px;
+.hero-buttons{
     display:flex;
     gap:15px;
-    flex-wrap:wrap;
+    margin-top:30px;
 }
 
 .btn{
-    padding:13px 25px;
+    padding:14px 27px;
     border-radius:30px;
+    border:2px solid #8e1888;
     text-decoration:none;
-    color:white;
-    border:1px solid #00eaff;
+    font-weight:bold;
     transition:.3s;
 }
 
-.btn.primary{
-    background:#00eaff;
-    color:#001015;
-    font-weight:bold;
+.btn-primary{
+    background:#921b8d;
+    color:white;
+}
+
+.btn-secondary{
+    color:#7e1879;
+    background:rgba(255,255,255,.35);
 }
 
 .btn:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 25px #00eaff;
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(100,20,95,.2);
 }
 
-/* 3D Card */
-.hero-card{
-    width:350px;
-    height:430px;
-    perspective:1000px;
+/* ================= PROFILE ================= */
+
+.profile-area{
+    position:absolute;
+    right:-2%;
+    bottom:20;
+    width:38%;
+    height:50%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
-.card{
-    width:100%;
-    height:100%;
-    padding:30px;
-    border:1px solid rgba(0,234,255,.4);
-    border-radius:30px;
-    background:linear-gradient(
-        145deg,
-        rgba(255,255,255,.12),
-        rgba(255,255,255,.02)
-    );
-    backdrop-filter:blur(20px);
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.5),
-        inset 0 0 30px rgba(0,234,255,.08);
-    transform-style:preserve-3d;
-    transition:transform .15s ease;
-}
-
-.profile{
-    height:180px;
-    width:180px;
-    margin:20px auto;
+.profile-circle{
+    position:absolute;
+    width:120px;
+    height:120px;
     border-radius:50%;
-    border:3px solid #00eaff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:65px;
-    color:#00eaff;
-    box-shadow:0 0 40px rgba(0,234,255,.5);
-    transform:translateZ(60px);
+    background:rgba(194,126,192,.28);
+    border:2px solid rgba(120,30,115,.3);
+}
+.profile-img{
+    width:50%;
+    max-width:580px;
+    height:auto;
+    position:relative;
+    z-index:2;
+    border-radius:50%;
+    filter:drop-shadow(0 20px 25px rgba(60,10,60,.3));
+    object-fit:contain;
 }
 
-.card h2{
-    text-align:center;
-    font-size:28px;
-    transform:translateZ(40px);
-}
+/* ================= SECTION ================= */
 
-.card p{
-    text-align:center;
-    color:#aaa;
-    margin-top:10px;
-    transform:translateZ(30px);
-}
-
-/* Sections */
 section{
-    padding:100px 7%;
+    padding:110px 7%;
 }
 
-.title{
-    text-align:center;
-    font-size:45px;
-    margin-bottom:50px;
+.section-title{
+    font-size:60px;
+    color:#941b8d;
+    margin-bottom:20px;
 }
 
-.title span{
-    color:#00eaff;
+.section-subtitle{
+    color:#666;
+    margin-bottom:45px;
 }
 
-/* About */
+/* ================= ABOUT ================= */
+
 .about{
-    display:flex;
-    justify-content:center;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
 }
 
 .about-box{
-    max-width:900px;
+    background:rgba(255,255,255,.38);
+    backdrop-filter:blur(18px);
     padding:40px;
-    border-radius:25px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    backdrop-filter:blur(15px);
-    line-height:1.8;
-    color:#bbb;
-    text-align:center;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.6);
 }
 
-/* Skills */
+.about-box p{
+    line-height:1.8;
+    color:#423842;
+}
+
+.about-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.info-card{
+    padding:25px;
+    background:rgba(213,164,211,.35);
+    border-radius:20px;
+}
+
+.info-card h3{
+    font-size:30px;
+    color:#8d1987;
+}
+
+.info-card p{
+    margin-top:5px;
+}
+
+/* ================= SKILLS ================= */
+
 .skills{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
     gap:20px;
 }
 
 .skill{
-    width:150px;
-    height:150px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:20px;
-    border:1px solid rgba(0,234,255,.3);
-    background:rgba(255,255,255,.04);
-    font-size:20px;
-    font-weight:bold;
+    background:rgba(255,255,255,.4);
+    backdrop-filter:blur(15px);
+    padding:35px 20px;
+    border-radius:25px;
+    text-align:center;
     transition:.4s;
-    transform-style:preserve-3d;
+    border:1px solid rgba(255,255,255,.6);
 }
 
 .skill:hover{
-    transform:rotateY(20deg) rotateX(15deg) translateY(-10px);
-    box-shadow:0 15px 30px rgba(0,234,255,.25);
-    color:#00eaff;
+    transform:translateY(-12px) rotate(-2deg);
+    background:rgba(220,170,218,.55);
 }
 
-/* Projects */
+.skill-icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.skill h3{
+    color:#761570;
+}
+
+/* ================= JOURNEY ================= */
+
+.timeline{
+    max-width:850px;
+    margin:auto;
+    position:relative;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:3px;
+    height:100%;
+    background:#a31d9c;
+}
+
+.timeline-item{
+    width:50%;
+    padding:20px 40px;
+    position:relative;
+}
+
+.timeline-item:nth-child(even){
+    margin-left:50%;
+}
+
+.timeline-dot{
+    position:absolute;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#a31d9c;
+    top:30px;
+    right:-9px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot{
+    left:-9px;
+}
+
+.timeline-card{
+    background:rgba(255,255,255,.45);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:20px;
+}
+
+.timeline-card h3{
+    color:#901b89;
+    margin-bottom:8px;
+}
+
+/* ================= PROJECTS ================= */
+
 .projects{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(3,1fr);
     gap:25px;
 }
 
 .project{
-    min-height:240px;
-    padding:30px;
+    background:rgba(255,255,255,.42);
+    backdrop-filter:blur(15px);
     border-radius:25px;
-    border:1px solid rgba(255,255,255,.1);
-    background:rgba(255,255,255,.04);
-    backdrop-filter:blur(12px);
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.6);
     transition:.4s;
 }
 
 .project:hover{
-    transform:translateY(-12px) rotateX(5deg);
-    border-color:#00eaff;
-    box-shadow:0 20px 40px rgba(0,234,255,.15);
+    transform:translateY(-10px);
 }
 
-.project h3{
-    color:#00eaff;
+.project-image{
+    height:190px;
+    background:linear-gradient(135deg,#c884c4,#f1cce9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:65px;
+}
+
+.project-content{
+    padding:25px;
+}
+
+.project-content h3{
+    color:#7f1779;
+    margin-bottom:10px;
+}
+
+.project-content p{
+    color:#5c535b;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.project-link{
+    display:inline-block;
+    margin-top:15px;
+    color:#941b8d;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+}
+
+.contact-left h3{
+    font-size:45px;
+    color:#901a89;
+    margin-bottom:20px;
+}
+
+.contact-left p{
+    line-height:1.8;
+}
+
+.contact-details{
+    margin-top:30px;
+}
+
+.contact-details div{
+    margin:15px 0;
+}
+
+.contact-form{
+    background:rgba(255,255,255,.4);
+    backdrop-filter:blur(18px);
+    padding:35px;
+    border-radius:25px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+    padding:16px;
+    margin-bottom:15px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.7);
+    font-family:inherit;
+}
+
+.contact-form textarea{
+    height:140px;
+    resize:none;
+}
+
+.contact-form button{
+    width:100%;
+    border:none;
+    padding:15px;
+    border-radius:30px;
+    background:#941b8d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.contact-form button:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:35px 7%;
+    background:#dca8d9;
+    text-align:center;
+}
+
+.socials{
+    display:flex;
+    justify-content:center;
+    gap:25px;
     margin-bottom:15px;
 }
 
-.project p{
-    color:#aaa;
-    line-height:1.6;
+.socials a{
+    text-decoration:none;
+    color:#64115f;
+    font-weight:bold;
 }
 
-/* Contact */
-.contact{
-    text-align:center;
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
 }
 
-.contact p{
-    color:#aaa;
-    margin-bottom:25px;
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 
-footer{
-    padding:25px;
-    text-align:center;
-    color:#777;
-    border-top:1px solid rgba(255,255,255,.08);
-}
+/* ================= MOBILE ================= */
 
-/* Mobile */
-@media(max-width:800px){
+@media(max-width:900px){
 
-    nav ul{
+    .nav-links{
         display:none;
     }
 
+    nav{
+        padding:0 20px;
+    }
+
     .hero{
-        flex-direction:column;
-        text-align:center;
-        gap:50px;
+        min-height:100vh;
+        display:block;
+        padding-top:120px;
     }
 
     .hero-content{
         width:100%;
     }
 
-    .buttons{
-        justify-content:center;
+    .hero h1{
+        font-size:18vw;
+        letter-spacing:-3px;
     }
 
-    .hero-card{
-        width:300px;
-        height:380px;
+    .hero-text{
+        font-size:14px;
     }
 
-    .profile{
-        width:150px;
-        height:150px;
+    .profile-area{
+        position:relative;
+        right:auto;
+        width:100%;
+        height:400px;
+        margin-top:30px;
+    }
+
+    .profile-circle{
+        width:280px;
+        height:280px;
+    }
+
+    .profile-img{
+        max-width:350px;
+    }
+
+    .floating-card{
+        right:5%;
+        top:5%;
+    }
+
+    .about,
+    .contact-container{
+        grid-template-columns:1fr;
+    }
+
+    .skills{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        font-size:45px;
+    }
+
+    .timeline::before{
+        left:10px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+        width:100%;
+        margin-left:0;
+        padding-left:40px;
+        padding-right:0;
+    }
+
+    .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot{
+        left:1px;
+        right:auto;
+    }
+}
+
+@media(max-width:500px){
+
+    .skills{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:19vw;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        text-align:center;
+    }
+
+    section{
+        padding:80px 5%;
     }
 }
 </style>
@@ -368,101 +606,138 @@ footer{
 
 <body>
 
-<canvas id="space"></canvas>
+<!-- ================= NAVBAR ================= -->
 
-<!-- NAVBAR -->
 <nav>
-    <div class="logo">HARIOM.DEV</div>
 
-    <ul>
+    <div class="logo">
+        HARIOM.
+    </div>
+
+    <ul class="nav-links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#journey">Journey</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+
 </nav>
 
-<!-- HERO -->
+
+<!-- ================= HERO ================= -->
+
 <section class="hero" id="home">
 
     <div class="hero-content">
 
-        <div class="badge">
-            🚀 3D Interactive Portfolio
+        <div class="small-title">
+            HELLO, I'M HARIOM
         </div>
 
         <h1>
-            Hi, I'm <span>Hariom</span>
+            <span>FRONTEND</span>
+            <span>DEVELOPER</span>
         </h1>
 
-        <p>
-            BCA 2nd Year Student & Web Developer.
-            I create modern, responsive and interactive
-            websites using HTML, CSS and JavaScript.
+        <p class="hero-text">
+            BCA student and aspiring Full Stack Developer.
+            I create modern, responsive and interactive websites
+            using clean code and creative design.
         </p>
 
-        <div class="buttons">
-            <a href="#projects" class="btn primary">
+        <div class="hero-buttons">
+
+            <a href="#projects" class="btn btn-primary">
                 View Projects
             </a>
 
-            <a href="#contact" class="btn">
+            <a href="#contact" class="btn btn-secondary">
                 Contact Me
             </a>
 
-            <a href="#" class="btn" onclick="downloadCV()">
-                Download CV
-            </a>
         </div>
 
     </div>
 
-    <!-- 3D CARD -->
-    <div class="hero-card">
 
-        <div class="card" id="card">
+    <div class="profile-area">
 
-            <div class="profile">
-                H
-            </div>
+        <div class="profile-circle"></div>
 
-            <h2>Hariom</h2>
-
-            <p>
-                BCA 2nd Year<br>
-                Web Developer
-            </p>
-
-        </div>
+        <!-- YOUR PHOTO -->
+        <img
+            src="https://scontent.cdninstagram.com/v/t51.82787-19/799170684_18062683139607713_3507992550684962475_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=101&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JQR6V8q2bDoQ7kNvwGPZuZ-&_nc_oc=AdqBFcuq9sVI7Pt3tqeTJ5AgjU-BuEULpkZ_FFgxDVPJy2aplmHrgpzvFoZzuJVxhgbVixXj8263VPz7WWqtrjn2&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=EGhCQBqzY-tdFyevNTckWw&_nc_ss=7b689&oh=00_AQIGaQF0fnXsG8nRq7J5PvPO78oBEARQjIpefnZb8tFNCg&oe=6AAD7EF0"
+            class="profile-img"
+            alt="Hariom"
+        >
 
     </div>
+
+
 
 </section>
 
 
-<!-- ABOUT -->
-<section id="about">
+<!-- ================= ABOUT ================= -->
 
-    <h2 class="title">
-        About <span>Me</span>
+<section id="about" class="reveal">
+
+    <h2 class="section-title">
+        ABOUT ME
     </h2>
+
+    <p class="section-subtitle">
+        A little introduction about me.
+    </p>
 
     <div class="about">
 
         <div class="about-box">
 
+            <h2 style="margin-bottom:20px;">
+                Who am I?
+            </h2>
+
             <p>
-                Hello! I'm Hariom, a BCA student and aspiring
-                Web Developer. I enjoy creating beautiful,
-                interactive and user-friendly websites.
-
-                <br><br>
-
-                I am currently improving my skills in
-                JavaScript, frontend development and
-                modern web technologies.
+                I'm Hariom, a BCA student passionate about web
+                development and technology. I enjoy transforming
+                ideas into beautiful and interactive websites.
             </p>
+
+            <br>
+
+            <p>
+                My current focus is Frontend Development with
+                HTML, CSS and JavaScript. My long-term goal is
+                to become a Full Stack Developer.
+            </p>
+
+        </div>
+
+
+        <div class="about-info">
+
+            <div class="info-card">
+                <h3>BCA</h3>
+                <p>Computer Applications</p>
+            </div>
+
+            <div class="info-card">
+                <h3>trusted</h3>
+                <p>with friends</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Frontend</h3>
+                <p>Current Focus</p>
+            </div>
+
+            <div class="info-card">
+                <h3>∞</h3>
+                <p>Learning Mindset</p>
+            </div>
 
         </div>
 
@@ -471,66 +746,249 @@ footer{
 </section>
 
 
-<!-- SKILLS -->
-<section id="skills">
+<!-- ================= JOURNEY ================= -->
 
-    <h2 class="title">
-        My <span>Skills</span>
+<section id="journey" class="reveal">
+
+    <h2 class="section-title">
+        MY JOURNEY
     </h2>
 
-    <div class="skills">
+    <p class="section-subtitle">
+        From student to developer.
+    </p>
 
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">C</div>
-        <div class="skill">C++</div>
-        <div class="skill">GitHub</div>
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+                <h3>10th</h3>
+
+                <p>
+                    Completed secondary education with
+                    <b>77%</b>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+                <h3>12th — Non-Medical</h3>
+
+                <p>
+                    Completed senior secondary education
+                    with <b>73%</b>.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+                <h3>BCA</h3>
+
+                <p>
+                    Started Bachelor of Computer Applications
+                    and began exploring programming and web
+                    development.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-card">
+
+                <h3>Frontend Developer</h3>
+
+                <p>
+                    Learning HTML, CSS and JavaScript while
+                    building real-world projects.
+                </p>
+
+            </div>
+
+        </div>
 
     </div>
 
 </section>
 
 
-<!-- PROJECTS -->
-<section id="projects">
+<!-- ================= SKILLS ================= -->
 
-    <h2 class="title">
-        My <span>Projects</span>
+<section id="skills" class="reveal">
+
+    <h2 class="section-title">
+        MY SKILLS
     </h2>
+
+    <p class="section-subtitle">
+        Technologies I'm learning and working with.
+    </p>
+
+
+    <div class="skills">
+
+        <div class="skill">
+            <div class="skill-icon">🌐</div>
+            <h3>HTML</h3>
+            <p>Structure & Semantics</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🎨</div>
+            <h3>CSS</h3>
+            <p>Design & Animation</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">⚡</div>
+            <h3>JavaScript</h3>
+            <p>Interactive Web</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🐍</div>
+            <h3>Python</h3>
+            <p>Programming</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">©️</div>
+            <h3>C</h3>
+            <p>Programming Basics</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">💻</div>
+            <h3>C++</h3>
+            <p>Object Oriented</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">📱</div>
+            <h3>Responsive</h3>
+            <p>Mobile Friendly</p>
+        </div>
+
+        <div class="skill">
+            <div class="skill-icon">🚀</div>
+            <h3>GitHub</h3>
+            <p>Version Control</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section id="projects" class="reveal">
+
+    <h2 class="section-title">
+        PROJECTS
+    </h2>
+
+    <p class="section-subtitle">
+        Some things I've built.
+    </p>
+
 
     <div class="projects">
 
         <div class="project">
-            <h3>🤖 JARVIS HUD</h3>
-            <p>
-                Futuristic AI-style HUD interface
-                with interactive animations.
-            </p>
+
+            <div class="project-image">
+                🌐
+            </div>
+
+            <div class="project-content">
+
+                <h3>Personal Portfolio</h3>
+
+                <p>
+                    A creative developer portfolio with
+                    animations, responsive design and modern UI.
+                </p>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
         </div>
 
-        <div class="project">
-            <h3>🎵 Music Website</h3>
-            <p>
-                A music website where songs can
-                be added and played directly.
-            </p>
-        </div>
 
         <div class="project">
-            <h3>📓 Online Notebook</h3>
-            <p>
-                Password protected digital notebook
-                with typing and save functionality.
-            </p>
+
+            <div class="project-image">
+                🤖
+            </div>
+
+            <div class="project-content">
+
+                <h3>AI Chatbot</h3>
+
+                <p>
+                    Interactive chatbot interface created
+                    using HTML, CSS and JavaScript.
+                </p>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
         </div>
 
+
         <div class="project">
-            <h3>🛒 Shopping Website</h3>
-            <p>
-                Modern responsive shopping website
-                created using frontend technologies.
-            </p>
+
+            <div class="project-image">
+                ♟️
+            </div>
+
+            <div class="project-content">
+
+                <h3>Chess Game</h3>
+
+                <p>
+                    Browser-based chess game experiment using
+                    HTML, CSS and JavaScript.
+                </p>
+
+                <a href="#" class="project-link">
+                    View Project →
+                </a>
+
+            </div>
+
         </div>
 
     </div>
@@ -538,187 +996,185 @@ footer{
 </section>
 
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
+<!-- ================= CONTACT ================= -->
 
-    <h2 class="title">
-        Contact <span>Me</span>
+<section id="contact" class="reveal">
+
+    <h2 class="section-title">
+        CONTACT
     </h2>
 
-    <p>
-        Interested in working together? Let's connect.
+    <p class="section-subtitle">
+        Let's build something awesome together.
     </p>
 
-    <div class="buttons" style="justify-content:center">
 
-        <a href="mailto:yourmail@gmail.com" class="btn primary">
-            📧 Email Me
-        </a>
+    <div class="contact-container">
 
-        <a href="https://github.com/" target="_blank" class="btn">
-            GitHub
-        </a>
+        <div class="contact-left">
+
+            <h3>
+                Let's Talk.
+            </h3>
+
+            <p>
+                Have a project idea, internship opportunity
+                or simply want to connect? Send me a message.
+            </p>
+
+
+            <div class="contact-details">
+
+                <div>
+                    📧 <b>Email:</b>
+                    hungamarr01@gmail.com
+                </div>
+
+                <div>
+                    📱 <b>Phone:</b>
+                    +91 9310149041
+                </div>
+
+                <div>
+                    📍 <b>Location:</b>
+                   ballabgarh Haryana, India 121004
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <form action="mailto:hungamarr01@gmail.com" method="POST" class="contact-form" id="contactForm">
+
+            <input
+                type="text"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                placeholder="Your Message"
+                required
+            ></textarea>
+
+            <button type="submit">
+                SEND MESSAGE 🚀
+            </button>
+
+        </form>
 
     </div>
 
 </section>
 
 
+<!-- ================= FOOTER ================= -->
+
 <footer>
-    © 2026 Hariom | 3D Web Developer Portfolio
+
+    <div class="socials">
+
+        <a href="https://github.com/hungamarr">GitHub</a>
+        <a href="https://www.instagram.com/xthakurhariom">Instagram</a>
+        <a href="https://www.linkedin.com/in/hungamarr">LinkedIn</a>
+
+    </div>
+
+    <p>
+        © 2026 Hariom — Frontend Developer
+    </p>
+
 </footer>
 
 
 <script>
 
-/* =========================
-   3D CARD MOUSE EFFECT
-========================= */
+/* ================= SCROLL REVEAL ================= */
 
-const card = document.getElementById("card");
+const reveals = document.querySelectorAll(".reveal");
 
-document.addEventListener("mousemove", (e) => {
+function revealOnScroll(){
 
-    const x = (window.innerWidth / 2 - e.clientX) / 25;
-    const y = (window.innerHeight / 2 - e.clientY) / 25;
+    reveals.forEach(element => {
 
-    card.style.transform =
-        `rotateY(${x}deg) rotateX(${y}deg)`;
+        const windowHeight = window.innerHeight;
 
-});
+        const elementTop =
+            element.getBoundingClientRect().top;
 
-card.addEventListener("mouseleave", () => {
+        if(elementTop < windowHeight - 100){
 
-    card.style.transform =
-        "rotateY(0deg) rotateX(0deg)";
+            element.classList.add("active");
 
-});
-
-
-/* =========================
-   SPACE PARTICLES
-========================= */
-
-const canvas = document.getElementById("space");
-const ctx = canvas.getContext("2d");
-
-let particles = [];
-
-function resize(){
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-}
-
-resize();
-
-window.addEventListener("resize", resize);
-
-
-for(let i = 0; i < 120; i++){
-
-    particles.push({
-
-        x:Math.random() * canvas.width,
-        y:Math.random() * canvas.height,
-        size:Math.random() * 2 + 0.5,
-        speed:Math.random() * 0.5 + 0.1
-
-    });
-
-}
-
-
-function animate(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    particles.forEach(p => {
-
-        p.y -= p.speed;
-
-        if(p.y < 0){
-            p.y = canvas.height;
-            p.x = Math.random() * canvas.width;
         }
 
-        ctx.beginPath();
-
-        ctx.arc(
-            p.x,
-            p.y,
-            p.size,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle = "rgba(0,234,255,.7)";
-        ctx.fill();
-
     });
-
-    requestAnimationFrame(animate);
 
 }
 
-animate();
+window.addEventListener("scroll", revealOnScroll);
+
+revealOnScroll();
 
 
-/* =========================
-   CV DOWNLOAD
-========================= */
+/* ================= CONTACT FORM ================= */
 
-function downloadCV(){
+document
+.getElementById("contactForm")
+.addEventListener("submit", function(e){
 
-    const cv = `
-HARIOM
-BCA 2nd Year Student | Web Developer
+    e.preventDefault();
 
-SKILLS
-HTML
-CSS
-JavaScript
-C
-C++
-GitHub
+    alert("Thank you! Your message has been received 🚀");
 
-ABOUT
-Aspiring Web Developer interested in creating
-modern and interactive websites.
+    this.reset();
 
-PROJECTS
-3D Portfolio
-JARVIS HUD
-Music Website
-Online Notebook
-Shopping Website
-`;
+});
 
-    const blob = new Blob([cv], {
-        type:"text/plain"
+
+/* ================= ACTIVE NAV ================= */
+
+const sections = document.querySelectorAll("section");
+const links = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 150;
+
+        if(scrollY >= sectionTop){
+
+            current = section.getAttribute("id");
+
+        }
+
     });
 
-    const url = URL.createObjectURL(blob);
+    links.forEach(link => {
 
-    const a = document.createElement("a");
+        link.style.color = "";
 
-    a.href = url;
-    a.download = "Hariom-CV.txt";
+        if(link.getAttribute("href") === "#" + current){
 
-    a.click();
+            link.style.color = "#a719a0";
 
-    URL.revokeObjectURL(url);
+        }
 
-}
+    });
+
+});
 
 </script>
 
 </body>
 </html>
-```
