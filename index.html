@@ -4,1175 +4,594 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hariom | Frontend Developer</title>
+<title>For You ❤️</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    scroll-behavior:smooth;
+    font-family:Segoe UI, sans-serif;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4edf5;
-    color:#171117;
-    overflow-x:hidden;
-}
-
-/* ================= BACKGROUND ================= */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:-10px;
-    background:
-        url("https://scontent.cdninstagram.com/v/t51.82787-19/799170684_18062683139607713_3507992550684962475_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=101&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JQR6V8q2bDoQ7kNvwGPZuZ-&_nc_oc=AdqBFcuq9sVI7Pt3tqeTJ5AgjU-BuEULpkZ_FFgxDVPJy2aplmHrgpzvFoZzuJVxhgbVixXj8263VPz7WWqtrjn2&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=EGhCQBqzY-tdFyevNTckWw&_nc_ss=7b689&oh=00_AQIGaQF0fnXsG8nRq7J5PvPO78oBEARQjIpefnZb8tFNCg&oe=6AAD7EF0") center/cover no-repeat;
-    filter:blur(1px);
-    z-index:-1;
-    transform:scale(1.0);
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:rgba(245,237,246,.72);
-    z-index:-1;
-}
-
-/* ================= NAVBAR ================= */
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 35px;
-    background:rgba(222,168,220,.75);
-    backdrop-filter:blur(15px);
-    z-index:1000;
-    border-bottom:1px solid rgba(255,255,255,.4);
-}
-
-.logo{
-    font-size:25px;
-    font-weight:800;
-    color:#ac0aa1;
-}
-
-.nav-links{
-    display:flex;
-    gap:38px;
-    list-style:none;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#191219;
-    font-size:14px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.nav-links a:hover{
-    color:#a719a0;
-}
-
-/* ================= HERO ================= */
-
-.hero{
     min-height:100vh;
-    padding:120px 5% 60px;
     display:flex;
+    justify-content:center;
     align-items:center;
-    position:relative;
     overflow:hidden;
-}
 
-.hero-content{
-    width:65%;
-    position:relative;
-    z-index:2;
-}
+    background:
+    radial-gradient(circle at top,#ff416c,#24000d 55%,#080008);
 
-.small-title{
-    color:#a51c9e;
-    font-size:16px;
-    letter-spacing:4px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-.hero h1{
-    font-size:clamp(70px,10vw,155px);
-    line-height:.82;
-    letter-spacing:-8px;
-    color:#a81da1;
-    font-weight:900;
-}
-
-.hero h1 span{
-    display:block;
-}
-
-.hero-text{
-    max-width:580px;
-    margin-top:35px;
-    font-size:17px;
-    line-height:1.7;
-    color:#322a32;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:15px;
-    margin-top:30px;
-}
-
-.btn{
-    padding:14px 27px;
-    border-radius:30px;
-    border:2px solid #8e1888;
-    text-decoration:none;
-    font-weight:bold;
-    transition:.3s;
-}
-
-.btn-primary{
-    background:#921b8d;
     color:white;
 }
 
-.btn-secondary{
-    color:#7e1879;
-    background:rgba(255,255,255,.35);
+/* floating hearts */
+
+.heart{
+    position:fixed;
+    bottom:-50px;
+    pointer-events:none;
+    animation:float 6s linear forwards;
 }
 
-.btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 25px rgba(100,20,95,.2);
+@keyframes float{
+
+    0%{
+        transform:translateY(0) scale(.5) rotate(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-110vh) scale(1.5) rotate(360deg);
+        opacity:0;
+    }
 }
 
-/* ================= PROFILE ================= */
 
-.profile-area{
-    position:absolute;
-    right:-2%;
-    bottom:20;
-    width:38%;
-    height:50%;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-}
+/* card */
 
-.profile-circle{
-    position:absolute;
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    background:rgba(194,126,192,.28);
-    border:2px solid rgba(120,30,115,.3);
-}
-.profile-img{
-    width:50%;
-    max-width:580px;
-    height:auto;
-    position:relative;
-    z-index:2;
-    border-radius:50%;
-    filter:drop-shadow(0 20px 25px rgba(60,10,60,.3));
-    object-fit:contain;
-}
+.card{
 
-/* ================= SECTION ================= */
+    width:90%;
+    max-width:620px;
 
-section{
-    padding:110px 7%;
-}
+    padding:45px 30px;
 
-.section-title{
-    font-size:60px;
-    color:#941b8d;
-    margin-bottom:20px;
-}
-
-.section-subtitle{
-    color:#666;
-    margin-bottom:45px;
-}
-
-/* ================= ABOUT ================= */
-
-.about{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:70px;
-    align-items:center;
-}
-
-.about-box{
-    background:rgba(255,255,255,.38);
-    backdrop-filter:blur(18px);
-    padding:40px;
-    border-radius:30px;
-    border:1px solid rgba(255,255,255,.6);
-}
-
-.about-box p{
-    line-height:1.8;
-    color:#423842;
-}
-
-.about-info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.info-card{
-    padding:25px;
-    background:rgba(213,164,211,.35);
-    border-radius:20px;
-}
-
-.info-card h3{
-    font-size:30px;
-    color:#8d1987;
-}
-
-.info-card p{
-    margin-top:5px;
-}
-
-/* ================= SKILLS ================= */
-
-.skills{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.skill{
-    background:rgba(255,255,255,.4);
-    backdrop-filter:blur(15px);
-    padding:35px 20px;
-    border-radius:25px;
     text-align:center;
-    transition:.4s;
-    border:1px solid rgba(255,255,255,.6);
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 0 50px rgba(255,20,90,.35);
+
+    animation:show 1s ease;
 }
 
-.skill:hover{
-    transform:translateY(-12px) rotate(-2deg);
-    background:rgba(220,170,218,.55);
+@keyframes show{
+
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
-.skill-icon{
-    font-size:45px;
-    margin-bottom:15px;
+
+.heart-main{
+
+    font-size:70px;
+
+    animation:beat 1.2s infinite;
 }
 
-.skill h3{
-    color:#761570;
+@keyframes beat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
 }
 
-/* ================= JOURNEY ================= */
 
-.timeline{
-    max-width:850px;
-    margin:auto;
-    position:relative;
-}
+h1{
 
-.timeline::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    width:3px;
-    height:100%;
-    background:#a31d9c;
-}
-
-.timeline-item{
-    width:50%;
-    padding:20px 40px;
-    position:relative;
-}
-
-.timeline-item:nth-child(even){
-    margin-left:50%;
-}
-
-.timeline-dot{
-    position:absolute;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#a31d9c;
-    top:30px;
-    right:-9px;
-}
-
-.timeline-item:nth-child(even) .timeline-dot{
-    left:-9px;
-}
-
-.timeline-card{
-    background:rgba(255,255,255,.45);
-    backdrop-filter:blur(15px);
-    padding:25px;
-    border-radius:20px;
-}
-
-.timeline-card h3{
-    color:#901b89;
-    margin-bottom:8px;
-}
-
-/* ================= PROJECTS ================= */
-
-.projects{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.project{
-    background:rgba(255,255,255,.42);
-    backdrop-filter:blur(15px);
-    border-radius:25px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.6);
-    transition:.4s;
-}
-
-.project:hover{
-    transform:translateY(-10px);
-}
-
-.project-image{
-    height:190px;
-    background:linear-gradient(135deg,#c884c4,#f1cce9);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:65px;
-}
-
-.project-content{
-    padding:25px;
-}
-
-.project-content h3{
-    color:#7f1779;
-    margin-bottom:10px;
-}
-
-.project-content p{
-    color:#5c535b;
-    line-height:1.6;
-    font-size:14px;
-}
-
-.project-link{
-    display:inline-block;
     margin-top:15px;
-    color:#941b8d;
-    font-weight:bold;
-    text-decoration:none;
+
+    font-size:42px;
+
+    color:#ff9db6;
 }
 
-/* ================= CONTACT ================= */
 
-.contact-container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-}
+.name{
 
-.contact-left h3{
-    font-size:45px;
-    color:#901a89;
-    margin-bottom:20px;
-}
+    font-size:34px;
 
-.contact-left p{
-    line-height:1.8;
-}
-
-.contact-details{
-    margin-top:30px;
-}
-
-.contact-details div{
     margin:15px 0;
-}
 
-.contact-form{
-    background:rgba(255,255,255,.4);
-    backdrop-filter:blur(18px);
-    padding:35px;
-    border-radius:25px;
-}
-
-.contact-form input,
-.contact-form textarea{
-    width:100%;
-    padding:16px;
-    margin-bottom:15px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    background:rgba(255,255,255,.7);
-    font-family:inherit;
-}
-
-.contact-form textarea{
-    height:140px;
-    resize:none;
-}
-
-.contact-form button{
-    width:100%;
-    border:none;
-    padding:15px;
-    border-radius:30px;
-    background:#941b8d;
-    color:white;
     font-weight:bold;
+
+    text-shadow:0 0 20px #ff416c;
+}
+
+
+.message{
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    color:#ffe6ec;
+
+    margin:20px auto;
+
+    max-width:500px;
+}
+
+
+.question{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    margin:25px 0;
+}
+
+
+/* buttons */
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+}
+
+
+button{
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
     cursor:pointer;
+
     transition:.3s;
 }
 
-.contact-form button:hover{
-    transform:translateY(-3px);
+
+.yes{
+
+    background:linear-gradient(45deg,#ff174f,#ff6b91);
+
+    color:white;
+
+    box-shadow:0 0 20px rgba(255,30,90,.5);
 }
 
-/* ================= FOOTER ================= */
 
-footer{
-    padding:35px 7%;
-    background:#dca8d9;
-    text-align:center;
+.yes:hover{
+
+    transform:scale(1.1);
+
+    box-shadow:0 0 35px rgba(255,30,90,.9);
 }
 
-.socials{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-bottom:15px;
+
+.no{
+
+    background:white;
+
+    color:#ff315e;
 }
 
-.socials a{
-    text-decoration:none;
-    color:#64115f;
-    font-weight:bold;
+
+.no:hover{
+
+    transform:scale(1.05);
 }
 
-/* ================= REVEAL ================= */
 
-.reveal{
-    opacity:0;
-    transform:translateY(50px);
-    transition:1s;
+/* result */
+
+.result{
+
+    display:none;
 }
 
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
+
+.result h2{
+
+    font-size:36px;
+
+    color:#ff9db6;
+
+    margin:20px 0;
 }
 
-/* ================= MOBILE ================= */
 
-@media(max-width:900px){
+.result p{
 
-    .nav-links{
-        display:none;
-    }
+    font-size:19px;
 
-    nav{
-        padding:0 20px;
-    }
+    line-height:1.7;
 
-    .hero{
-        min-height:100vh;
-        display:block;
-        padding-top:120px;
-    }
-
-    .hero-content{
-        width:100%;
-    }
-
-    .hero h1{
-        font-size:18vw;
-        letter-spacing:-3px;
-    }
-
-    .hero-text{
-        font-size:14px;
-    }
-
-    .profile-area{
-        position:relative;
-        right:auto;
-        width:100%;
-        height:400px;
-        margin-top:30px;
-    }
-
-    .profile-circle{
-        width:280px;
-        height:280px;
-    }
-
-    .profile-img{
-        max-width:350px;
-    }
-
-    .floating-card{
-        right:5%;
-        top:5%;
-    }
-
-    .about,
-    .contact-container{
-        grid-template-columns:1fr;
-    }
-
-    .skills{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .projects{
-        grid-template-columns:1fr;
-    }
-
-    .section-title{
-        font-size:45px;
-    }
-
-    .timeline::before{
-        left:10px;
-    }
-
-    .timeline-item,
-    .timeline-item:nth-child(even){
-        width:100%;
-        margin-left:0;
-        padding-left:40px;
-        padding-right:0;
-    }
-
-    .timeline-dot,
-    .timeline-item:nth-child(even) .timeline-dot{
-        left:1px;
-        right:auto;
-    }
+    color:#ffe6ec;
 }
+
+
+.retry{
+
+    margin-top:25px;
+
+    background:#ff416c;
+
+    color:white;
+}
+
 
 @media(max-width:500px){
 
-    .skills{
-        grid-template-columns:1fr;
+    h1{
+        font-size:32px;
     }
 
-    .hero h1{
-        font-size:19vw;
+    .name{
+        font-size:28px;
     }
 
-    .hero-buttons{
-        flex-direction:column;
+    .message{
+        font-size:16px;
     }
 
-    .btn{
-        text-align:center;
+    .question{
+        font-size:21px;
     }
 
-    section{
-        padding:80px 5%;
-    }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= NAVBAR ================= -->
 
-<nav>
+<div class="card">
 
-    <div class="logo">
-        HARIOM.
-    </div>
+    <!-- MAIN PROPOSAL -->
 
-    <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#journey">Journey</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div id="proposal">
 
-</nav>
+        <div class="heart-main">❤️</div>
 
+        <h1>Hey...</h1>
 
-<!-- ================= HERO ================= -->
+        <!-- CHANGE NAME HERE -->
 
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <div class="small-title">
-            HELLO, I'M HARIOM
+        <div class="name">
+            Sakshi 💕
         </div>
 
-        <h1>
-            <span>FRONTEND</span>
-            <span>DEVELOPER</span>
-        </h1>
+        <p class="message" id="message">
 
-        <p class="hero-text">
-            BCA student and aspiring Full Stack Developer.
-            I create modern, responsive and interactive websites
-            using clean code and creative design.
+            Sach bolu?
+
+            Tumhari smile mein kuch toh special hai. 😊
+
+            <br><br>
+
+            Tumse baat karna,
+            tumhe dekhna,
+            aur tumhari choti-choti baatein
+            mujhe genuinely achhi lagti hain.
+
         </p>
 
-        <div class="hero-buttons">
 
-            <a href="#projects" class="btn btn-primary">
-                View Projects
-            </a>
+        <div class="question" id="question">
 
-            <a href="#contact" class="btn btn-secondary">
-                Contact Me
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="profile-area">
-
-        <div class="profile-circle"></div>
-
-        <!-- YOUR PHOTO -->
-        <img
-            src="https://scontent.cdninstagram.com/v/t51.82787-19/799170684_18062683139607713_3507992550684962475_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_cat=101&ccb=7-5&_nc_sid=f7ccc5&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=JQR6V8q2bDoQ7kNvwGPZuZ-&_nc_oc=AdqBFcuq9sVI7Pt3tqeTJ5AgjU-BuEULpkZ_FFgxDVPJy2aplmHrgpzvFoZzuJVxhgbVixXj8263VPz7WWqtrjn2&_nc_zt=24&_nc_ht=scontent.cdninstagram.com&_nc_gid=EGhCQBqzY-tdFyevNTckWw&_nc_ss=7b689&oh=00_AQIGaQF0fnXsG8nRq7J5PvPO78oBEARQjIpefnZb8tFNCg&oe=6AAD7EF0"
-            class="profile-img"
-            alt="Hariom"
-        >
-
-    </div>
-
-
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section id="about" class="reveal">
-
-    <h2 class="section-title">
-        ABOUT ME
-    </h2>
-
-    <p class="section-subtitle">
-        A little introduction about me.
-    </p>
-
-    <div class="about">
-
-        <div class="about-box">
-
-            <h2 style="margin-bottom:20px;">
-                Who am I?
-            </h2>
-
-            <p>
-                I'm Hariom, a BCA student passionate about web
-                development and technology. I enjoy transforming
-                ideas into beautiful and interactive websites.
-            </p>
-
-            <br>
-
-            <p>
-                My current focus is Frontend Development with
-                HTML, CSS and JavaScript. My long-term goal is
-                to become a Full Stack Developer.
-            </p>
+            Kya tum mujhe ek chance dogi? ❤️
 
         </div>
 
 
-        <div class="about-info">
+        <div class="buttons">
 
-            <div class="info-card">
-                <h3>BCA</h3>
-                <p>Computer Applications</p>
-            </div>
-
-            <div class="info-card">
-                <h3>trusted</h3>
-                <p>with friends</p>
-            </div>
-
-            <div class="info-card">
-                <h3>Frontend</h3>
-                <p>Current Focus</p>
-            </div>
-
-            <div class="info-card">
-                <h3>∞</h3>
-                <p>Learning Mindset</p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= JOURNEY ================= -->
-
-<section id="journey" class="reveal">
-
-    <h2 class="section-title">
-        MY JOURNEY
-    </h2>
-
-    <p class="section-subtitle">
-        From student to developer.
-    </p>
-
-    <div class="timeline">
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-card">
-
-                <h3>10th</h3>
-
-                <p>
-                    Completed secondary education with
-                    <b>77%</b>.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-card">
-
-                <h3>12th — Non-Medical</h3>
-
-                <p>
-                    Completed senior secondary education
-                    with <b>73%</b>.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-card">
-
-                <h3>BCA</h3>
-
-                <p>
-                    Started Bachelor of Computer Applications
-                    and began exploring programming and web
-                    development.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="timeline-item">
-
-            <div class="timeline-dot"></div>
-
-            <div class="timeline-card">
-
-                <h3>Frontend Developer</h3>
-
-                <p>
-                    Learning HTML, CSS and JavaScript while
-                    building real-world projects.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= SKILLS ================= -->
-
-<section id="skills" class="reveal">
-
-    <h2 class="section-title">
-        MY SKILLS
-    </h2>
-
-    <p class="section-subtitle">
-        Technologies I'm learning and working with.
-    </p>
-
-
-    <div class="skills">
-
-        <div class="skill">
-            <div class="skill-icon">🌐</div>
-            <h3>HTML</h3>
-            <p>Structure & Semantics</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">🎨</div>
-            <h3>CSS</h3>
-            <p>Design & Animation</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">⚡</div>
-            <h3>JavaScript</h3>
-            <p>Interactive Web</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">🐍</div>
-            <h3>Python</h3>
-            <p>Programming</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">©️</div>
-            <h3>C</h3>
-            <p>Programming Basics</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">💻</div>
-            <h3>C++</h3>
-            <p>Object Oriented</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">📱</div>
-            <h3>Responsive</h3>
-            <p>Mobile Friendly</p>
-        </div>
-
-        <div class="skill">
-            <div class="skill-icon">🚀</div>
-            <h3>GitHub</h3>
-            <p>Version Control</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PROJECTS ================= -->
-
-<section id="projects" class="reveal">
-
-    <h2 class="section-title">
-        PROJECTS
-    </h2>
-
-    <p class="section-subtitle">
-        Some things I've built.
-    </p>
-
-
-    <div class="projects">
-
-        <div class="project">
-
-            <div class="project-image">
-                🌐
-            </div>
-
-            <div class="project-content">
-
-                <h3>Personal Portfolio</h3>
-
-                <p>
-                    A creative developer portfolio with
-                    animations, responsive design and modern UI.
-                </p>
-
-                <a href="#" class="project-link">
-                    View Project →
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="project">
-
-            <div class="project-image">
-                🤖
-            </div>
-
-            <div class="project-content">
-
-                <h3>AI Chatbot</h3>
-
-                <p>
-                    Interactive chatbot interface created
-                    using HTML, CSS and JavaScript.
-                </p>
-
-                <a href="#" class="project-link">
-                    View Project →
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="project">
-
-            <div class="project-image">
-                ♟️
-            </div>
-
-            <div class="project-content">
-
-                <h3>Chess Game</h3>
-
-                <p>
-                    Browser-based chess game experiment using
-                    HTML, CSS and JavaScript.
-                </p>
-
-                <a href="#" class="project-link">
-                    View Project →
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-
-<section id="contact" class="reveal">
-
-    <h2 class="section-title">
-        CONTACT
-    </h2>
-
-    <p class="section-subtitle">
-        Let's build something awesome together.
-    </p>
-
-
-    <div class="contact-container">
-
-        <div class="contact-left">
-
-            <h3>
-                Let's Talk.
-            </h3>
-
-            <p>
-                Have a project idea, internship opportunity
-                or simply want to connect? Send me a message.
-            </p>
-
-
-            <div class="contact-details">
-
-                <div>
-                    📧 <b>Email:</b>
-                    hungamarr01@gmail.com
-                </div>
-
-                <div>
-                    📱 <b>Phone:</b>
-                    +91 9310149041
-                </div>
-
-                <div>
-                    📍 <b>Location:</b>
-                   ballabgarh Haryana, India 121004
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <form action="mailto:hungamarr01@gmail.com" method="POST" class="contact-form" id="contactForm">
-
-            <input
-                type="text"
-                placeholder="Your Name"
-                required
-            >
-
-            <input
-                type="email"
-                placeholder="Your Email"
-                required
-            >
-
-            <textarea
-                placeholder="Your Message"
-                required
-            ></textarea>
-
-            <button type="submit">
-                SEND MESSAGE 🚀
+            <button class="yes" onclick="yesClicked()">
+                Yes ❤️
             </button>
 
-        </form>
+            <button class="no" onclick="noClicked()">
+                No 😶
+            </button>
+
+        </div>
 
     </div>
 
-</section>
 
+    <!-- FINAL RESULT -->
 
-<!-- ================= FOOTER ================= -->
+    <div class="result" id="result">
 
-<footer>
+        <div class="heart-main" id="finalEmoji">
+            ❤️
+        </div>
 
-    <div class="socials">
+        <h2 id="finalTitle">
+            Theek hai 😊
+        </h2>
 
-        <a href="https://github.com/hungamarr">GitHub</a>
-        <a href="https://www.instagram.com/xthakurhariom">Instagram</a>
-        <a href="https://www.linkedin.com/in/hungamarr">LinkedIn</a>
+        <p id="finalMessage">
+            Koi baat nahi ❤️
+
+            <br><br>
+
+            Main tumhari choice ki respect karta hoon.
+
+            <br><br>
+
+            Shayad timing sahi nahi hai...
+            baad mein phir try karunga. 😄🌹
+        </p>
+
+        <button class="retry" onclick="location.reload()">
+            Ek baar phir dekho ❤️
+        </button>
 
     </div>
 
-    <p>
-        © 2026 Hariom — Frontend Developer
-    </p>
-
-</footer>
+</div>
 
 
 <script>
 
-/* ================= SCROLL REVEAL ================= */
 
-const reveals = document.querySelectorAll(".reveal");
+/* ---------------------------
+   NO CLICK MESSAGES
+---------------------------- */
 
-function revealOnScroll(){
 
-    reveals.forEach(element => {
+let noCount = 0;
 
-        const windowHeight = window.innerHeight;
 
-        const elementTop =
-            element.getBoundingClientRect().top;
+const messages = [
 
-        if(elementTop < windowHeight - 100){
+    {
+        text:
+        "No bhi bol diya? 😭😂\n\n" +
+        "Waise tumhari smile abhi bhi bahut cute hai. ❤️",
 
-            element.classList.add("active");
+        question:
+        "Ek baar aur sochogi? 🥺"
+    },
 
-        }
+    {
+        text:
+        "Theek hai... 😅\n\n" +
+        "Lekin honestly, tumhari personality kaafi achhi hai. ✨",
 
-    });
+        question:
+        "Thoda sa chance? ❤️"
+    },
+
+    {
+        text:
+        "Achha ji... phir se No? 😂\n\n" +
+        "Tumhari simplicity hi tumhe itna special banati hai. 🌸",
+
+        question:
+        "Ab toh ek Yes banta hai na? 😄"
+    },
+
+    {
+        text:
+        "Okay okay... samajh raha hoon. 😄\n\n" +
+        "Waise tumhari respect aur kindness mujhe bahut achhi lagti hai. ❤️",
+
+        question:
+        "Last time pooch raha hoon... ❤️"
+    }
+
+];
+
+
+function noClicked(){
+
+    noCount++;
+
+
+    /* If she keeps saying NO */
+
+    if(noCount >= 5){
+
+        document.getElementById("proposal").style.display="none";
+
+        document.getElementById("result").style.display="block";
+
+        document.getElementById("finalEmoji").innerHTML="🌹";
+
+        document.getElementById("finalTitle").innerHTML=
+        "Theek hai... 😊❤️";
+
+        document.getElementById("finalMessage").innerHTML=
+
+        "Koi baat nahi ❤️" +
+
+        "<br><br>" +
+
+        "Main tumhari choice ki respect karta hoon." +
+
+        "<br><br>" +
+
+        "Bas itna kehna tha ki tum mere liye special ho. 🌸" +
+
+        "<br><br>" +
+
+        "Baad mein phir try karunga... 😄🌹";
+
+        return;
+    }
+
+
+    /* Change compliment */
+
+    let current = messages[noCount - 1];
+
+    document.getElementById("message").innerHTML =
+    current.text.replace(/\n/g,"<br>");
+
+    document.getElementById("question").innerHTML =
+    current.question;
+
+
+    /* Change button text */
+
+    const noButton = document.querySelector(".no");
+
+    const noTexts = [
+
+        "No 😶",
+
+        "Still No? 🥺",
+
+        "Really? 😭",
+
+        "Pakka No? 😂",
+
+        "Okay... 😅"
+
+    ];
+
+    noButton.innerHTML = noTexts[noCount];
 
 }
 
-window.addEventListener("scroll", revealOnScroll);
 
-revealOnScroll();
-
-
-/* ================= CONTACT FORM ================= */
-
-document
-.getElementById("contactForm")
-.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    alert("Thank you! Your message has been received 🚀");
-
-    this.reset();
-
-});
+/* ---------------------------
+   YES
+---------------------------- */
 
 
-/* ================= ACTIVE NAV ================= */
+function yesClicked(){
 
-const sections = document.querySelectorAll("section");
-const links = document.querySelectorAll(".nav-links a");
+    document.getElementById("proposal").style.display="none";
 
-window.addEventListener("scroll", () => {
+    document.getElementById("result").style.display="block";
 
-    let current = "";
+    document.getElementById("finalEmoji").innerHTML="💖";
 
-    sections.forEach(section => {
+    document.getElementById("finalTitle").innerHTML=
+    "You just made my day! 🥹❤️";
 
-        const sectionTop = section.offsetTop - 150;
+    document.getElementById("finalMessage").innerHTML=
 
-        if(scrollY >= sectionTop){
+    "I promise I will always respect you," +
 
-            current = section.getAttribute("id");
+    "<br><br>" +
 
-        }
+    "make you smile," +
 
-    });
+    "<br><br>" +
 
-    links.forEach(link => {
+    "and appreciate having you in my life. 🌹❤️";
 
-        link.style.color = "";
 
-        if(link.getAttribute("href") === "#" + current){
 
-            link.style.color = "#a719a0";
+    /* heart explosion */
 
-        }
+    for(let i=0;i<40;i++){
 
-    });
+        setTimeout(createHeart,i*60);
 
-});
+    }
+
+}
+
+
+/* ---------------------------
+   FLOATING HEARTS
+---------------------------- */
+
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    const icons=[
+        "❤️",
+        "💕",
+        "💖",
+        "💗",
+        "💘",
+        "🌹",
+        "✨"
+    ];
+
+    heart.innerHTML=
+    icons[Math.floor(Math.random()*icons.length)];
+
+
+    heart.style.left=
+    Math.random()*100+"vw";
+
+
+    heart.style.fontSize=
+    (15+Math.random()*30)+"px";
+
+
+    heart.style.animationDuration=
+    (4+Math.random()*5)+"s";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(()=>{
+
+        heart.remove();
+
+    },9000);
+
+}
+
+
+setInterval(createHeart,500);
+
 
 </script>
 
